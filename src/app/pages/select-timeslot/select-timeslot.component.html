@@ -1,0 +1,6 @@
+<button routerLink="/queues" class="backButton" mat-raised-button color="primary">Back</button>
+<h2> Select your timeslot </h2>
+
+<mat-nav-list *ngIf="availabilities" >
+  <mat-list-item *ngFor="let availability of availabilities | objetToArray" (click)="selectTimeslot( availability )" > {{ availability }} </mat-list-item>
+</mat-nav-list>

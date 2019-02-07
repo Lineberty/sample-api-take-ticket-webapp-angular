@@ -1,0 +1,43 @@
+#appContainer {
+  width: 60vw;
+  height: 90vh;
+  margin-top: 5vh;
+  margin-left: 20vw;
+  text-align: center;
+  color: black;
+  border: 1px solid black;
+  border-radius: 4px;
+  overflow-x: hidden;
+  overflow-y: auto;
+  position: relative;
+}
+
+.backButton {
+  position: absolute;
+  top: 1vh;
+  left: 1vw;
+}
+
+mat-list-item {
+  color: black !important;
+  border-bottom: 1px solid rgb(210,210,210);
+}
+
+mat-nav-list mat-list-item:last-child {
+  border-bottom: none;
+}
+
+.mat-nav-list {
+  width: 80%;
+  margin-left: 10%;
+}
+
+mat-card {
+  width: 60%;
+  margin: auto;
+  margin-bottom: 5vh;
+}
+
+mat-card-title {
+  text-align: left;
+}

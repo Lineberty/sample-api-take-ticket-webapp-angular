@@ -1,0 +1,6 @@
+<button routerLink="/queues" class="backButton" mat-raised-button color="primary">Back</button>
+<h2> Select the subject of your visit </h2>
+
+<mat-nav-list *ngIf="localStorage.selectedQueue && localStorage.selectedQueue.appointmentTypes" >
+  <mat-list-item *ngFor="let appointmentType of localStorage.selectedQueue.appointmentTypes | objetToArray" (click)="selectAppointmentType( appointmentType )" > {{ appointmentType.name[ config.defaultLang ] }} </mat-list-item>
+</mat-nav-list>

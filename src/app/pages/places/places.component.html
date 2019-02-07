@@ -1,0 +1,6 @@
+<button routerLink="/home" class="backButton" mat-raised-button color="primary">Home</button>
+<h2> Select your place </h2>
+
+<mat-nav-list *ngIf="localStorage.places" >
+  <mat-list-item *ngFor="let place of localStorage.places | objetToArray" (click)="selectPlace( place )" > {{ place.name[ config.defaultLang ] }} </mat-list-item>
+</mat-nav-list>

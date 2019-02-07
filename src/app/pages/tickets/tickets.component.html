@@ -1,0 +1,36 @@
+<ng-container *ngIf="localStorage.tickets">
+  <button routerLink="/home" class="backButton" mat-raised-button color="primary">Home</button>
+
+  <h2> Your tickets </h2>
+
+  <mat-card *ngFor="let ticket of localStorage.tickets" >
+
+    <mat-card-header>
+      <mat-card-title> {{ ticket.place.name }} <br /> {{ ticket.queue.name }} </mat-card-title>
+    </mat-card-header>
+
+    <mat-card-content>
+      Ticket N° {{ ticket.label }}
+      <br />
+      Group of {{ ticket.groupSize }} people
+      <br />
+      Estimated passage at {{ ticket.timeline.estimatedFor }}
+      <br />
+      State {{ getTicketState( ticket.state ) }}
+      <br />
+      For "{{ ticket.appointmentType.name }}"
+    </mat-card-content>
+
+    <mat-card-actions>
+      <button *ngIf="ticket.state < 6" (click)="cancelTicket( ticket )" mat-raised-button color="warn">Cancel</button>
+      <button *ngIf="ticket.state < 6" (click)="reportTicket( ticket )" mat-raised-button color="primary">Report</button>
+      <button (click)="rateTicket( ticket )" mat-raised-button color="accent">Rate</button>
+    </mat-card-actions>
+
+  </mat-card>
+
+</ng-container>
+
+<ng-container *ngIf="!localStorage.tickets">
+  <h2> Your don't have any tickets </h2>
+</ng-container>

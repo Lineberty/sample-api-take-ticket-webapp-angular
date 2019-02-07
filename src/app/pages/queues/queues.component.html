@@ -1,0 +1,6 @@
+<button routerLink="/places" class="backButton" mat-raised-button color="primary">Back</button>
+<h2> Select your queue </h2>
+
+<mat-nav-list *ngIf="localStorage.queuesOfSelectedPlace" >
+  <mat-list-item *ngFor="let queue of localStorage.queuesOfSelectedPlace | objetToArray" (click)="selectQueue( queue )" > {{ queue.name[ config.defaultLang ] }} </mat-list-item>
+</mat-nav-list>
