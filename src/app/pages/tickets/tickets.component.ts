@@ -63,12 +63,12 @@ export class TicketsComponent implements OnInit {
     });
   }
 
-  reportTicket() {
+  postponeTicket() {
     const data: any = {
       width: '250px',
       data: {
         title: 'Documentation',
-        text: 'Watch the document for more informations',
+        text: 'See the API documentation for more informations',
         confirm: 'Ok',
         cancel: ''
       }
@@ -81,7 +81,7 @@ export class TicketsComponent implements OnInit {
       width: '250px',
       data: {
         title: 'Documentation',
-        text: 'Watch the document for more informations',
+        text: 'See the API documentation for more informations',
         confirm: 'Ok',
         cancel: ''
       }
@@ -94,19 +94,21 @@ export class TicketsComponent implements OnInit {
     switch ( state ) {
       case 0:
         return 'BOOKED'
-      case 1:
+      case 50:
+        return 'TO CONFIRM'
+      case 100:
         return 'ALERTED'
-      case 2:
+      case 200:
         return 'CALLED'
-      case 3:
+      case 300:
         return 'ON HOLD'
-      case 4:
+      case 400:
         return 'NO SHOW'
-      case 5:
+      case 500:
         return 'IN PROGRESS'
-      case 6:
+      case 600:
         return 'CANCELLED'
-      case 7:
+      case 700:
         return 'DONE'
     }
 

@@ -22,8 +22,8 @@
     </mat-card-content>
 
     <mat-card-actions>
-      <button *ngIf="ticket.state < 6" (click)="cancelTicket( ticket )" mat-raised-button color="warn">Cancel</button>
-      <button *ngIf="ticket.state < 6" (click)="reportTicket( ticket )" mat-raised-button color="primary">Report</button>
+      <button *ngIf="ticket.state < 600" (click)="cancelTicket( ticket )" mat-raised-button color="warn">Cancel</button>
+      <button *ngIf="ticket.state < 600" (click)="postponeTicket( ticket )" mat-raised-button color="primary">Postpone</button>
       <button (click)="rateTicket( ticket )" mat-raised-button color="accent">Rate</button>
     </mat-card-actions>
 

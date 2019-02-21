@@ -21,7 +21,9 @@ export class LbHttpService {
 
   getApiKey() {
     const url = this.config.getApiKey
-    return this.http.get(url).pipe(
+    const httpOptions = {headers: this.generateHeaders( null )}
+
+    return this.http.get(url, httpOptions).pipe(
       first(),
       catchError( (error) => {
         console.log( 'Error while getting API_KEY' )
@@ -45,11 +47,7 @@ export class LbHttpService {
 
     }
 
-    const headers = {
-      'Access-Control-Allow-Methods': 'POST,GET,OPTIONS,DELETE',
-      'Access-Control-Allow-Origin': '*',
-      'Content-Type':  'application/json',
-    }
+    const headers = {}
 
     const params = {
       'key': this.localStorage.getApiKey()
@@ -67,13 +65,29 @@ export class LbHttpService {
       headers['Authorization'] = 'Bearer ' + this.localStorage.getUserBearer()
     }
 
-    return { headers: new HttpHeaders(headers), params: params  }
+    return { headers: this.generateHeaders(headers), params: params  }
+  }
+
+  generateHeaders( otherHeaders ) {
+      let headers
+      if ( otherHeaders ) {
+        headers = otherHeaders
+      } else {
+        headers = {}
+      }
+
+    headers[ 'Access-Control-Allow-Methods' ] = 'POST,GET,OPTIONS,DELETE'
+    headers[ 'Access-Control-Allow-Origin' ] = '*'
+    headers[ 'Content-Type' ] = 'application/json'
+
+    return new HttpHeaders( headers )
   }
 
   createUser() {
     const url = this.config.createUser
+    const httpOptions = {headers: this.generateHeaders( null )}
 
-    return this.http.post(url, null).pipe(
+    return this.http.post(url, null, httpOptions).pipe(
       first(),
       catchError( (error) => {
         console.log( 'Error while creating user' )
@@ -86,8 +100,9 @@ export class LbHttpService {
   logUser( ) {
     const url = this.config.logUser
     const params = {userId: this.localStorage.getUserId()}
+    const httpOptions = {headers: this.generateHeaders( null ), params: params}
 
-    return this.http.get(url, {params: params}).pipe(
+    return this.http.get(url, httpOptions).pipe(
       first(),
       catchError( (error) => {
         console.log( 'Error while logging user' )
@@ -100,8 +115,9 @@ export class LbHttpService {
   refreshToken() {
     const url = this.config.refreshToken
     const params = {userId: this.localStorage.getUserId(), sessionId: this.localStorage.getSessionId()}
+    const httpOptions = {headers: this.generateHeaders( null ), params: params}
 
-    return this.http.get(url, {params: params}).pipe(
+    return this.http.get(url, httpOptions).pipe(
       first(),
       catchError( (error) => {
         console.log( 'Error while refreshing token' )
@@ -323,17 +339,17 @@ export class LbHttpService {
     )
   }
 
-  async reportTicket( ticketId ) {
-    let url = this.config.reportTicket
+  async postponeTicket( ticketId ) {
+    let url = this.config.postponeTicket
     url = url.replace( '{ticketId}', ticketId )
-    const body = { reportFor: this.localStorage.selectedBookedFor }
+    const body = { postponeTo: this.localStorage.selectedBookedFor }
     const httpOptions = await this.generateHeaderForLineberty( true )
 
     return this.http.put(url, body, httpOptions).pipe(
       first(),
       tap( (ticket: any) => this.localStorage.setTicket( ticket ) ),
       catchError( (error) => {
-        console.log( 'Error while reporting ticket' )
+        console.log( 'Error while postponing ticket' )
         console.log(error)
         return throwError( error )
       })
@@ -343,7 +359,7 @@ export class LbHttpService {
   async rateTicket( ticketId ) {
     let url = this.config.rateTicket
     url = url.replace( '{ticketId}', ticketId )
-    const body = { reportFor: this.localStorage.selectedBookedFor }
+    const body = { postponeTo: this.localStorage.selectedBookedFor }
     const httpOptions = await this.generateHeaderForLineberty( true )
 
     return this.http.put(url, body, httpOptions).pipe(

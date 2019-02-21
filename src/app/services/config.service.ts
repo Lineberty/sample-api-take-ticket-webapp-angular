@@ -25,7 +25,7 @@ export class ConfigService {
   bookingTicket: string = this.linebertyServer + this.linebertyApiVersion + '/queues/{queueId}/ticket'
   cancelTicket: string = this.linebertyServer + this.linebertyApiVersion + '/user/tickets/{ticketId}/cancel'
 
-  /*reportTicket: string = this.linebertyServer + this.linebertyApiVersion + '/user/tickets/{ticketId}/report'
+  /*postponeTicket: string = this.linebertyServer + this.linebertyApiVersion + '/user/tickets/{ticketId}/postpone'
   getQueuesState: string = this.linebertyServer + this.linebertyApiVersion + '/queues/state'
   getQueuesEligibility: string = this.linebertyServer + this.linebertyApiVersion + '/queues/eligibility'
   rateTicket: string = this.linebertyServer + this.linebertyApiVersion + '/user/tickets/{ticketId}/rate'*/
